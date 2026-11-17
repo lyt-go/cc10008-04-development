@@ -16,6 +16,7 @@ const Funnel = () => import('@/views/funnel/index.vue')
 const Scrollmap = () => import('@/views/scrollmap/index.vue')
 const Formfield = () => import('@/views/formfield/index.vue')
 const Clickstream = () => import('@/views/clickstream/index.vue')
+const Clickverify = () => import('@/views/clickverify/index.vue')
 const Retention = () => import('@/views/retention/index.vue')
 const Dataview = () => import('@/views/dataview/index.vue')
 const Paramdef = () => import('@/views/paramdef/index.vue')
@@ -39,6 +40,7 @@ const router = createRouter({
     { path: '/scrollmap', name: 'scrollmap', component: Scrollmap },
     { path: '/formfield', name: 'formfield', component: Formfield },
     { path: '/clickstream', name: 'clickstream', component: Clickstream },
+    { path: '/clickverify', name: 'clickverify', component: Clickverify },
     { path: '/retention', name: 'retention', component: Retention },
     { path: '/dataview', name: 'dataview', component: Dataview },
     { path: '/paramdef', name: 'paramdef', component: Paramdef },

@@ -20,17 +20,60 @@ function readStorage(): Record<string, EntryRow[]> {
   }
   try {
     const parsed = JSON.parse(raw) as Record<string, EntryRow[]>
-    return { ...fallback, ...parsed }
+    const merged = migrateStructuredFields({ ...fallback, ...parsed }, fallback)
+    return merged
   } catch {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(fallback))
     return fallback
   }
 }
 
+/**
+ * 结构化字段迁移：老版本 localStorage 里的会话/点击流行没有「会话边界」「点击明细」
+ * 等核验依赖字段。按业务主键（会话编号/序列编号）从种子数据补齐这些字段，
+ * 用户已有的状态与其它字段保持不变；同时确保新增模块键存在。
+ */
+function migrateStructuredFields(
+  stored: Record<string, EntryRow[]>,
+  fallback: Record<string, EntryRow[]>,
+): Record<string, EntryRow[]> {
+  const backfill = (moduleKey: string, idField: string, extraFields: string[]) => {
+    const storedRows = stored[moduleKey]
+    const seedRows = fallback[moduleKey]
+    if (!storedRows || !seedRows) {
+      return
+    }
+    let changed = false
+    const seedById = new Map(seedRows.map((row) => [String(row[idField]), row]))
+    stored[moduleKey] = storedRows.map((row) => {
+      if (extraFields.some((field) => row[field] !== undefined)) {
+        return row
+      }
+      const seed = seedById.get(String(row[idField]))
+      if (!seed) {
+        return row
+      }
+      changed = true
+      return { ...row, ...Object.fromEntries(extraFields.map((field) => [field, seed[field]])) }
+    })
+    if (changed) {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
+    }
+  }
+
+  backfill('session', '会话编号', ['会话边界'])
+  backfill('clickstream', '序列编号', ['点击明细', '关联会话'])
+  if (!stored.clickverify) {
+    stored.clickverify = fallback.clickverify ?? []
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
+  }
+  return stored
+}
+
 let cache: Record<string, EntryRow[]> | null = null
 
-export function allRows(): Record<string, EntryRow[]> {
-  if (cache === null) {
+export function allRows(forceRefresh = false): Record<string, EntryRow[]> {
+  if (cache === null || forceRefresh) {
     cache = readStorage()
   }
   return cache

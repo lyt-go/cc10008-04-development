@@ -55,6 +55,7 @@
             >
               {{ action }}
             </button>
+            <RouterLink class="link" :to="`/clickverify?session=${row['会话编号']}`">发起点击链核验</RouterLink>
           </td>
         </tr>
         <tr v-if="!rows.length">

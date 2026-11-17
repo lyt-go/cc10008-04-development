@@ -67,13 +67,14 @@ export const SEED_ROWS: Record<string, EntryRow[]> = {
       "pending": true,
       "abnormal": true,
       "会话编号": "SESS-0002",
-      "用户标识": "会话重放样例2",
+      "用户标识": "U-1002",
       "开始时间": "2026-09-02",
-      "持续时长秒": "会话重放样例2",
-      "页面访问数": "会话重放样例2",
-      "事件触发数": "会话重放样例2",
-      "关键路径标识": "会话重放样例2",
-      "异常退出标记": "会话重放样例2"
+      "持续时长秒": "1800",
+      "页面访问数": "5",
+      "事件触发数": "8",
+      "关键路径标识": "PATH-SESS-0002",
+      "异常退出标记": "否",
+      "会话边界": "{\"sessionCode\":\"SESS-0002\",\"startTime\":\"2026-09-02T08:00:00\",\"endTime\":\"2026-09-02T08:30:00\",\"pages\":[\"/home\",\"/search\",\"/product\",\"/cart\",\"/pay\"]}"
     },
     {
       "id": 3,
@@ -81,13 +82,14 @@ export const SEED_ROWS: Record<string, EntryRow[]> = {
       "pending": false,
       "abnormal": false,
       "会话编号": "SESS-0003",
-      "用户标识": "会话重放样例3",
-      "开始时间": "2026-09-03",
-      "持续时长秒": "会话重放样例3",
-      "页面访问数": "会话重放样例3",
-      "事件触发数": "会话重放样例3",
-      "关键路径标识": "会话重放样例3",
-      "异常退出标记": "会话重放样例3"
+      "用户标识": "U-1002",
+      "开始时间": "2026-09-02",
+      "持续时长秒": "900",
+      "页面访问数": "2",
+      "事件触发数": "3",
+      "关键路径标识": "PATH-SESS-0003",
+      "异常退出标记": "否",
+      "会话边界": "{\"sessionCode\":\"SESS-0003\",\"startTime\":\"2026-09-02T09:00:00\",\"endTime\":\"2026-09-02T09:20:00\",\"pages\":[\"/home\",\"/profile/loyalty\"]}"
     }
   ],
   "heatmap": [
@@ -625,13 +627,15 @@ export const SEED_ROWS: Record<string, EntryRow[]> = {
       "pending": true,
       "abnormal": false,
       "序列编号": "CLIC-0001",
-      "用户标识": "点击流样例1",
+      "用户标识": "U-1001",
       "起始时间": "2026-09-01",
       "页面序列": "点击流样例1",
       "点击元素序列": "点击流样例1",
       "总点击数": "点击流样例1",
       "有效点击数": "点击流样例1",
-      "无效点击数": "点击流样例1"
+      "无效点击数": "点击流样例1",
+      "关联会话": "SESS-0001",
+      "点击明细": "[]"
     },
     {
       "id": 2,
@@ -639,13 +643,15 @@ export const SEED_ROWS: Record<string, EntryRow[]> = {
       "pending": true,
       "abnormal": true,
       "序列编号": "CLIC-0002",
-      "用户标识": "点击流样例2",
-      "起始时间": "2026-09-02",
-      "页面序列": "点击流样例2",
-      "点击元素序列": "点击流样例2",
-      "总点击数": "点击流样例2",
-      "有效点击数": "点击流样例2",
-      "无效点击数": "点击流样例2"
+      "用户标识": "U-1002",
+      "起始时间": "2026-09-02 08:00",
+      "页面序列": "/home > /search > /product > /cart > /pay",
+      "点击元素序列": "搜索框 > 商品卡片 > 加入购物车按钮 > 结算按钮 > 确认支付按钮",
+      "总点击数": "8",
+      "有效点击数": "6",
+      "无效点击数": "2",
+      "关联会话": "SESS-0002",
+      "点击明细": "[{\"clickCode\":\"CLK-201\",\"sourcePage\":\"/home\",\"element\":\"搜索框\",\"eventTime\":\"2026-09-02T08:02:00\",\"batchNo\":\"B0902-1\",\"sequenceCode\":\"CLIC-0002\"},{\"clickCode\":\"CLK-202\",\"sourcePage\":\"/search\",\"element\":\"商品卡片\",\"eventTime\":\"2026-09-02T08:06:00\",\"batchNo\":\"B0902-1\",\"sequenceCode\":\"CLIC-0002\"},{\"clickCode\":\"CLK-203\",\"sourcePage\":\"/product\",\"element\":\"加入购物车按钮\",\"eventTime\":\"2026-09-02T08:11:00\",\"batchNo\":\"B0902-1\",\"sequenceCode\":\"CLIC-0002\"},{\"clickCode\":\"CLK-204\",\"sourcePage\":\"/cart\",\"element\":\"结算按钮\",\"eventTime\":\"2026-09-02T08:16:00\",\"batchNo\":\"B0902-1\",\"sequenceCode\":\"CLIC-0002\"},{\"clickCode\":\"CLK-204\",\"sourcePage\":\"/cart\",\"element\":\"结算按钮\",\"eventTime\":\"2026-09-02T08:16:05\",\"batchNo\":\"B0902-2\",\"sequenceCode\":\"CLIC-0002\"},{\"clickCode\":\"CLK-205\",\"sourcePage\":\"/pay\",\"element\":\"确认支付按钮\",\"eventTime\":\"2026-09-02T08:21:00\",\"batchNo\":\"B0902-1\",\"sequenceCode\":\"CLIC-0002\"},{\"clickCode\":\"CLK-205\",\"sourcePage\":\"/pay\",\"element\":\"确认支付按钮\",\"eventTime\":\"2026-09-02T08:21:10\",\"batchNo\":\"B0902-2\",\"sequenceCode\":\"CLIC-0002\"},{\"clickCode\":\"CLK-206\",\"sourcePage\":\"/pay\",\"element\":\"分享返现按钮\",\"eventTime\":\"2026-09-02T08:26:00\",\"batchNo\":\"B0902-1\",\"sequenceCode\":\"CLIC-0002\"}]"
     },
     {
       "id": 3,
@@ -653,15 +659,19 @@ export const SEED_ROWS: Record<string, EntryRow[]> = {
       "pending": false,
       "abnormal": false,
       "序列编号": "CLIC-0003",
-      "用户标识": "点击流样例3",
-      "起始时间": "2026-09-03",
-      "页面序列": "点击流样例3",
-      "点击元素序列": "点击流样例3",
-      "总点击数": "点击流样例3",
-      "有效点击数": "点击流样例3",
-      "无效点击数": "点击流样例3"
+      "用户标识": "U-1002",
+      "起始时间": "2026-09-02 09:00",
+      "页面序列": "/home > /profile/loyalty",
+      "点击元素序列": "活动横幅 > 积分兑换入口",
+      "总点击数": "3",
+      "有效点击数": "1",
+      "无效点击数": "2",
+      "关联会话": "SESS-0003",
+      "点击明细": "[{\"clickCode\":\"CLK-301\",\"sourcePage\":\"/home\",\"element\":\"活动横幅\",\"eventTime\":\"2026-09-02T09:02:00\",\"batchNo\":\"B0902-3\",\"sequenceCode\":\"CLIC-0003\"},{\"clickCode\":\"CLK-302\",\"sourcePage\":\"/profile/loyalty\",\"element\":\"积分兑换入口\",\"eventTime\":\"2026-09-02T09:08:00\",\"batchNo\":\"B0902-3\",\"sequenceCode\":\"CLIC-0003\"},{\"clickCode\":\"CLK-303\",\"sourcePage\":\"/profile/loyalty\",\"element\":\"会员升级入口\",\"eventTime\":\"2026-09-02T09:14:00\",\"batchNo\":\"B0902-3\",\"sequenceCode\":\"CLIC-0003\"}]"
     }
   ],
+  // 点击链核验模块：报告由核验任务实时生成并写入 localStorage，播种阶段保持空清单。
+  "clickverify": [],
   "retention": [
     {
       "id": 1,
